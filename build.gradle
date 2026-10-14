@@ -46,3 +46,27 @@ jar {
 	}
 }
 loom { runs { configureEach { vmArgs "-Xmx3G" }; client { programArgs "--username", "Dev" } } }
+
+sourceSets {
+	gametest {
+		compileClasspath += main.compileClasspath + main.output
+		runtimeClasspath += main.runtimeClasspath + main.output
+	}
+}
+
+loom {
+	mods {
+		cottonmod { sourceSet sourceSets.main }
+		"cottonmod-gametest" { sourceSet sourceSets.gametest }
+	}
+	runs {
+		gametest {
+			server()
+			name "Game Test"
+			vmArg "-Dfabric-api.gametest"
+			vmArg "-Dfabric-api.gametest.report-file=${project.layout.buildDirectory.get()}/junit.xml"
+			runDir "build/gametest"
+			source sourceSets.gametest
+		}
+	}
+}

@@ -1,0 +1,9 @@
+{
+    "schemaVersion": 1,
+    "id": "cottonmod-gametest",
+    "version": "1.0.0",
+    "name": "Cotton Game Tests",
+    "environment": "*",
+    "entrypoints": { "fabric-gametest": ["net.daemon.cottonmod.test.CottonGameTest"] },
+    "depends": { "cottonmod": "*", "fabric-gametest-api-v1": "*" }
+}
