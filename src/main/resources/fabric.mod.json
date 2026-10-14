@@ -1,10 +1,9 @@
 {
     "schemaVersion": 1,
     "id": "cottonmod",
-    "version": "1.0.4",
-
+    "version": "${version}",
     "name": "Cotton Mod",
-    "description": "Adds cotton to Minecraft 1.19.2!",
+    "description": "Adds cotton crops to Minecraft. Find cotton seeds in grass and grow your own string.",
     "authors": [
         "Daemon-Tech"
     ],
@@ -12,27 +11,21 @@
         "homepage": "https://modrinth.com/user/Daemon",
         "sources": "https://github.com/daemon-tech"
     },
-
     "license": "CC0-1.0",
     "icon": "assets/cottonmod/icon.png",
-
     "environment": "*",
     "entrypoints": {
         "main": [
             "net.daemon.cottonmod.CottonMod"
+        ],
+        "client": [
+            "net.daemon.cottonmod.CottonModClient"
         ]
     },
-    "mixins": [
-        "cottonmod.mixins.json"
-    ],
-
     "depends": {
-        "fabricloader": ">=0.14.10",
+        "fabricloader": ">=0.16.0",
         "fabric-api": "*",
-        "minecraft": "1.19.2",
-        "java": ">=17"
-    },
-    "suggests": {
-        "another-mod": "*"
+        "minecraft": "~1.21.1",
+        "java": ">=21"
     }
 }
