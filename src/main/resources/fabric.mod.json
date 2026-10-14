@@ -11,7 +11,7 @@
         "homepage": "https://modrinth.com/user/Daemon",
         "sources": "https://github.com/daemon-tech"
     },
-    "license": "CC0-1.0",
+    "license": "MIT",
     "icon": "assets/cottonmod/icon.png",
     "environment": "*",
     "entrypoints": {
