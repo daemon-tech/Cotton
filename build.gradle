@@ -45,3 +45,4 @@ jar {
 		rename { "${it}_${base.archivesName.get()}" }
 	}
 }
+loom { runs { configureEach { vmArgs "-Xmx3G" }; client { programArgs "--username", "Dev" } } }
