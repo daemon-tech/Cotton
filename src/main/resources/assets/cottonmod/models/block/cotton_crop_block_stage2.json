@@ -1,0 +1,6 @@
+{
+    "parent": "minecraft:block/cross",
+    "textures": {
+        "cross": "cottonmod:block/cotton_crop_block_stage2"
+    }
+}
