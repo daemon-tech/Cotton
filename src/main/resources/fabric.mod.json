@@ -17,15 +17,12 @@
     "entrypoints": {
         "main": [
             "net.daemon.cottonmod.CottonMod"
-        ],
-        "client": [
-            "net.daemon.cottonmod.CottonModClient"
         ]
     },
     "depends": {
-        "fabricloader": ">=0.16.0",
+        "fabricloader": ">=0.19.5",
         "fabric-api": "*",
-        "minecraft": "~1.21.1",
-        "java": ">=21"
+        "minecraft": "~26.3",
+        "java": ">=25"
     }
 }

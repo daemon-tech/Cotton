@@ -1,0 +1,6 @@
+{
+    "model": {
+        "type": "minecraft:model",
+        "model": "cottonmod:item/cotton_seed_item"
+    }
+}

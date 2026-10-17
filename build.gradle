@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version "${loom_version}"
+	id 'net.fabricmc.fabric-loom' version "${loom_version}"
 	id 'maven-publish'
 }
 
@@ -13,40 +13,6 @@ base {
 repositories {
 }
 
-// Modrinth upload config removed: the old config contained a hard-coded token.
-// Publish manually or re-add minotaur using the MODRINTH_TOKEN env variable.
-
-dependencies {
-	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-}
-
-processResources {
-	inputs.property "version", project.version
-	filesMatching("fabric.mod.json") {
-		expand "version": project.version
-	}
-}
-
-tasks.withType(JavaCompile).configureEach {
-	it.options.release = 21
-}
-
-java {
-	withSourcesJar()
-	sourceCompatibility = JavaVersion.VERSION_21
-	targetCompatibility = JavaVersion.VERSION_21
-}
-
-jar {
-	from("LICENSE") {
-		rename { "${it}_${base.archivesName.get()}" }
-	}
-}
-loom { runs { configureEach { vmArgs "-Xmx3G" }; client { programArgs "--username", "Dev" } } }
-
 sourceSets {
 	gametest {
 		compileClasspath += main.compileClasspath + main.output
@@ -55,11 +21,14 @@ sourceSets {
 }
 
 loom {
+	splitEnvironmentSourceSets()
 	mods {
-		cottonmod { sourceSet sourceSets.main }
+		cottonmod { sourceSet sourceSets.main; sourceSet sourceSets.client }
 		"cottonmod-gametest" { sourceSet sourceSets.gametest }
 	}
 	runs {
+		configureEach { vmArgs "-Xmx3G" }
+		client { programArgs "--username", "Dev" }
 		gametest {
 			server()
 			name "Game Test"
@@ -68,5 +37,35 @@ loom {
 			runDir "build/gametest"
 			source sourceSets.gametest
 		}
+	}
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+}
+
+processResources {
+	def version = project.version
+	inputs.property "version", version
+	filesMatching("fabric.mod.json") {
+		expand "version": version
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 25
+}
+
+java {
+	withSourcesJar()
+	sourceCompatibility = JavaVersion.VERSION_25
+	targetCompatibility = JavaVersion.VERSION_25
+}
+
+jar {
+	from("LICENSE") {
+		rename { "${it}_${base.archivesName.get()}" }
 	}
 }

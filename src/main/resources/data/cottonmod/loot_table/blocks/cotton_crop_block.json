@@ -1,25 +1,24 @@
 {
     "type": "minecraft:block",
+    "modifier": {
+        "type": "minecraft:explosion_decay"
+    },
     "pools": [
         {
-            "rolls": 1,
-            "bonus_rolls": 0,
             "entries": [
                 {
                     "type": "minecraft:alternatives",
                     "children": [
                         {
                             "type": "minecraft:item",
-                            "name": "cottonmod:cotton_item",
-                            "conditions": [
-                                {
-                                    "condition": "minecraft:block_state_property",
-                                    "block": "cottonmod:cotton_crop_block",
-                                    "properties": {
-                                        "age": "7"
-                                    }
+                            "condition": {
+                                "type": "minecraft:match_block",
+                                "blocks": "cottonmod:cotton_crop_block",
+                                "state": {
+                                    "age": "7"
                                 }
-                            ]
+                            },
+                            "name": "cottonmod:cotton_item"
                         },
                         {
                             "type": "minecraft:item",
@@ -27,42 +26,34 @@
                         }
                     ]
                 }
-            ]
+            ],
+            "rolls": 1
         },
         {
-            "rolls": 1,
-            "bonus_rolls": 0,
+            "condition": {
+                "type": "minecraft:match_block",
+                "blocks": "cottonmod:cotton_crop_block",
+                "state": {
+                    "age": "7"
+                }
+            },
             "entries": [
                 {
                     "type": "minecraft:item",
-                    "name": "cottonmod:cotton_seed_item",
-                    "functions": [
-                        {
-                            "function": "minecraft:apply_bonus",
-                            "enchantment": "minecraft:fortune",
-                            "formula": "minecraft:binomial_with_bonus_count",
-                            "parameters": {
-                                "extra": 3,
-                                "probability": 0.5714286
-                            }
+                    "modifier": {
+                        "type": "minecraft:apply_bonus",
+                        "enchantment": "minecraft:fortune",
+                        "formula": "minecraft:binomial_with_bonus_count",
+                        "parameters": {
+                            "extra": 3,
+                            "probability": 0.5714286
                         }
-                    ]
+                    },
+                    "name": "cottonmod:cotton_seed_item"
                 }
             ],
-            "conditions": [
-                {
-                    "condition": "minecraft:block_state_property",
-                    "block": "cottonmod:cotton_crop_block",
-                    "properties": {
-                        "age": "7"
-                    }
-                }
-            ]
+            "rolls": 1
         }
     ],
-    "functions": [
-        {
-            "function": "minecraft:explosion_decay"
-        }
-    ]
+    "random_sequence": "cottonmod:blocks/cotton_crop_block"
 }
